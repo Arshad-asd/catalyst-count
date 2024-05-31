@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block title %}Upload Data{% endblock %}
@@ -35,7 +35,7 @@
         $('#startUploadBtn').on('click', function() {
             var formData = new FormData($('#upload-form')[0]);
             $.ajax({
-                url: '{% url "upload_data" %}',
+                url: '{% url "upload_chunk" %}',
                 type: 'POST',
                 data: formData,
                 processData: false,
