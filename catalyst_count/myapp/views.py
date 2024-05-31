@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
+from django.contrib.auth.decorators import login_required
 
 
 @csrf_exempt
@@ -33,12 +34,26 @@ def upload_chunk(request):
                     os.remove(chunk_path)
             
             Upload.objects.create(file=final_path)
-            return JsonResponse({'message': 'File uploaded successfully'})
+            
+            # Parse the CSV file and update the database
+            with open(final_path, newline='', encoding='utf-8') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    CompanyData.objects.create(
+                        keyword=row['Keyword'],
+                        industry=row['Industry'],
+                        year_founded=int(row['Year Founded']),
+                        city=row['City'],
+                        state=row['State'],
+                        country=row['Country'],
+                        employees_from=int(row['Employees (From)']),
+                        employees_to=int(row['Employees (To)'])
+                    )
+            
+            return JsonResponse({'message': 'File uploaded and processed successfully'})
         
         return JsonResponse({'message': 'Chunk uploaded successfully'})
     return HttpResponse(status=405)
-
-from django.contrib.auth.decorators import login_required
 
 @login_required
 def upload_data_view(request):
