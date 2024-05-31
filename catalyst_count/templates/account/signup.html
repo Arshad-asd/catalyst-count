@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load form_tags %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">{% trans "Sign Up" %}</h2>
+                <form method="post" action="{% url 'account_signup' %}" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_username">{% trans "Username" %}</label>
+                        {{ form.username|add_class:"form-control" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password1">{% trans "Password" %}</label>
+                        {{ form.password1|add_class:"form-control" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password2">{% trans "Password (again)" %}</label>
+                        {{ form.password2|add_class:"form-control" }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-3">{% trans "Sign Up" %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

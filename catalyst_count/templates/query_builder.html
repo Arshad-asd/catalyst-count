@@ -1,0 +1,51 @@
+<!-- templates/query_builder.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Query Builder</h2>
+    <form method="get" action="">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="keyword">Keyword</label>
+                <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Keyword">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="industry">Industry</label>
+                <input type="text" class="form-control" id="industry" name="industry" placeholder="Industry">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="year_founded">Year Founded</label>
+                <input type="number" class="form-control" id="year_founded" name="year_founded" placeholder="Year Founded">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city" name="city" placeholder="City">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="state">State</label>
+                <input type="text" class="form-control" id="state" name="state" placeholder="State">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="country">Country</label>
+                <input type="text" class="form-control" id="country" name="country" placeholder="Country">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="employees_from">Employees (From)</label>
+                <input type="number" class="form-control" id="employees_from" name="employees_from" placeholder="Employees (From)">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="employees_to">Employees (To)</label>
+                <input type="number" class="form-control" id="employees_to" name="employees_to" placeholder="Employees (To)">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Query Data</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
+    </form>
+</div>
+{% endblock %}
